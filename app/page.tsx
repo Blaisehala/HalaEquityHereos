@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { HeroCarousel } from "./components/HeroCarousel";
 
 const stats = [
   { label: "Local chapters", value: "24+" },
@@ -59,80 +60,49 @@ const waysToJoin = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#FFF8EE] via-[#E6F3FF] to-[#15162b] text-slate-900">
-      <header className="sticky top-0 z-20 border-b border-white/10 bg-[#FFF8EE]/80 backdrop-blur">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-2">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-400/10 text-sm font-semibold text-emerald-300 ring-1 ring-emerald-400/40">
-              HE
-            </span>
-            <div className="leading-tight">
-              <p className="text-sm font-semibold tracking-tight">
-                Hala Equity Heroes
-              </p>
-              <p className="text-xs text-zinc-400">
-                A community of everyday changemakers
-              </p>
-            </div>
-          </div>
-          <nav className="hidden items-center gap-6 text-sm text-zinc-300 sm:flex">
-            <a href="#mission" className="hover:text-emerald-300">
-              Mission
-            </a>
-            <a href="#initiatives" className="hover:text-emerald-300">
-              Initiatives
-            </a>
-            <a href="#join" className="hover:text-emerald-300">
-              Get involved
-            </a>
-            <a href="#faq" className="hover:text-emerald-300">
-              FAQ
-            </a>
-          </nav>
-          <a
-            href="#join"
-            className="inline-flex items-center gap-2 rounded-full bg-emerald-400 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-zinc-900 shadow-sm shadow-emerald-500/40 transition hover:bg-emerald-300"
-          >
-            Join as a Hero
-          </a>
-        </div>
-      </header>
-
-      <main className="pb-16 pt-10 sm:pt-16">
-        {/* Hero */}
-        <section className="mx-auto max-w-5xl px-6 pb-14 pt-8">
-          <div className="space-y-6">
-            <p className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/5 px-3 py-1 text-xs font-medium text-emerald-700">
-              Community-powered • Equity-focused • Transparent
+    <div className="min-h-screen bg-gradient-to-b from-[#0c2340] via-[#E6F3FF] to-[#15162b] text-slate-900">
+      <main>
+        {/* Hero – carousel passes through "Changing lives" with curved top */}
+        <section className="relative min-h-[90vh] overflow-hidden bg-[#0c2340] text-white">
+          {/* Headline block – sits on top; carousel curves up through this zone */}
+          <div className="relative z-10 mx-auto max-w-6xl px-4 pt-8 sm:px-6 sm:pt-10">
+            <p className="text-sm font-medium text-white/90 sm:text-base">
+              Hala Equity Heroes
             </p>
-            <h1 className="text-balance text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
-              Fuel local equity work,
-              <span className="text-emerald-600"> together.</span>
+            <p className="mt-0.5 text-sm text-white/80 sm:text-base">
+              Bringing hope and healing
+            </p>
+            <h1 className="mt-3 text-4xl font-bold tracking-tight drop-shadow-[0_2px_8px_rgba(12,35,64,0.8)] sm:text-5xl md:text-6xl">
+              Changing lives
             </h1>
-            <p className="max-w-xl text-pretty text-sm leading-relaxed text-slate-700 sm:text-base">
-              Hala Equity Heroes is a community-based charity that directs time,
-              skills, and resources to grassroots leaders advancing gender,
-              racial, economic, and educational equity. No gatekeeping. No
-              saviorism. Just people showing up for each other.
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/90 sm:text-base">
+              In regions where resources are scarce, our community-powered
+              initiatives are among the most effective ways to deliver care and
+              equity to those who need it most.
             </p>
-            <div className="flex flex-wrap items-center gap-3">
-              <a
-                href="#join"
-                className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-emerald-500/40 transition hover:bg-emerald-400"
-              >
-                Get involved today
-              </a>
-              <a
-                href="#how-it-works"
-                className="inline-flex items-center justify-center rounded-full border border-emerald-500/30 px-5 py-2.5 text-sm font-medium text-emerald-700 transition hover:border-emerald-500 hover:text-emerald-800"
-              >
-                See how it works
-              </a>
-            </div>
-            <div className="mt-4 flex flex-wrap gap-6 text-xs text-slate-600">
+          </div>
+
+          {/* Curved clip so carousel passes through headline – defined once, used below */}
+          <svg width={0} height={0} aria-hidden className="absolute">
+            <defs>
+              <clipPath id="hero-carousel-curve" clipPathUnits="objectBoundingBox">
+                <path d="M 0 0 L 0 1 L 1 1 L 1 0 Q 0.5 -0.14 0 0 Z" />
+              </clipPath>
+            </defs>
+          </svg>
+          {/* Carousel with curved top so images pass through the headline area */}
+          <div
+            className="relative -mt-12 h-[48vh] min-h-[300px] sm:-mt-16 sm:h-[52vh] sm:min-h-[340px] md:-mt-20 md:h-[55vh]"
+            style={{ clipPath: "url(#hero-carousel-curve)" }}
+          >
+            <HeroCarousel />
+          </div>
+
+          <div className="relative z-10 mx-auto max-w-6xl px-4 pb-8 sm:px-6">
+            <div className="mt-4 flex flex-wrap gap-6 text-xs text-white/70">
               {stats.map((stat) => (
                 <div key={stat.label}>
-                  <p className="text-sm font-semibold text-emerald-600">
+                  <p className="text-sm font-semibold text-white">
                     {stat.value}
                   </p>
                   <p>{stat.label}</p>
