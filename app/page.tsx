@@ -4,7 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 // import { HeroCarousel } from "./components/HeroCarousel";
 import CurvedCarousel from "./components/CurvedCarousel";
-import Navigation from "./components/Navigation";
+
 
 const stats = [
   { label: "Local chapters", value: "24+" },
@@ -66,7 +66,7 @@ const waysToJoin = [
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0c2340] via-[#E6F3FF] to-[#15162b] text-slate-900">
-      <Navigation />
+      
       <main className="pt-16">
         {/* Hero with Curved Carousel */}
 
