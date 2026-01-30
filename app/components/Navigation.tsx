@@ -26,9 +26,12 @@ export default function Navigation() {
               <div className="w-10 h-10 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center text-white font-bold">
                 HE
               </div>
-              <span className="text-white font-semibold text-sm sm:text-base hidden sm:block">
+              {/* <span className="text-white font-semibold text-sm sm:text-base hidden sm:block">
                 Hala Equity Heroes
-              </span>
+              </span> */}
+              <span className="text-white font-semibold text-lg sm:text-sm md:text-base">
+  Hala Equity Heroes
+</span>
             </Link>
 
             {/* Desktop Links */}
