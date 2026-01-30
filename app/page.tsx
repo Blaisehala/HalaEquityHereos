@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 // import { HeroCarousel } from "./components/HeroCarousel";
 import CurvedCarousel from "./components/CurvedCarousel";
+import Navigation from "./components/Navigation";
 
 const stats = [
   { label: "Local chapters", value: "24+" },
@@ -65,18 +66,23 @@ const waysToJoin = [
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0c2340] via-[#E6F3FF] to-[#15162b] text-slate-900">
-      <main>
+      <Navigation />
+      <main className="pt-16">
         {/* Hero with Curved Carousel */}
 
        {/* Hero with Curved Carousel */}
 {/* Hero with Curved Carousel */}
 <section className="relative min-h-[85vh] sm:min-h-[90vh] overflow-hidden bg-[#0c2340] text-white pb-8">
-  {/* Mobile: Dark overlay for text readability (only on mobile) */}
-  <div className="absolute inset-0 bg-gradient-to-b from-[#0c2340]/95 via-[#0c2340]/70 to-[#0c2340]/95 z-20 pointer-events-none md:hidden" />
+  {/* Mobile: Lighter overlay - only at top and bottom */}
+  <div className="absolute inset-0 bg-gradient-to-b from-[#0c2340]/90 via-transparent to-[#0c2340]/80 z-20 pointer-events-none md:hidden" />
   
   {/* Mobile: Text box at top */}
   <div className="relative z-30 mx-auto max-w-6xl px-4 pt-12 sm:pt-16 md:hidden">
-    <div className="bg-[#0c2340]/80 backdrop-blur-sm rounded-2xl p-6">
+  
+    <div className="bg-[#0c2340]/70 backdrop-blur-sm rounded-2xl p-2">
+    <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-center mb-6">
+      Changing Lives
+    </h1>
       <p className="mt-4 text-sm leading-relaxed text-white/95 sm:text-base">
         In regions where resources are scarce, our community-powered
         initiatives are among the most effective ways to deliver care and
@@ -102,15 +108,15 @@ export default function Home() {
     </p>
   </div>
 
-  {/* Stats - Bottom */}
-  <div className="relative z-30 mx-auto max-w-6xl px-4 sm:px-6 mt-8 md:mt-12">
+  {/* Stats - Moved down more on mobile, clear of images */}
+  <div className="relative z-30 mx-auto max-w-6xl px-4 sm:px-6 mt-[520px] sm:mt-[460px] md:mt-12">
     <div className="flex flex-wrap gap-4 sm:gap-6 text-xs justify-center md:justify-start">
       {stats.map((stat) => (
-        <div key={stat.label} className="bg-[#0c2340]/80 backdrop-blur-sm rounded-lg px-4 py-2 md:bg-white/10">
+        <div key={stat.label} className="bg-[#0c2340]/90 backdrop-blur-md rounded-lg px-4 py-3 md:bg-white/10 shadow-lg">
           <p className="text-base sm:text-lg font-semibold text-white">
             {stat.value}
           </p>
-          <p className="text-white/80">{stat.label}</p>
+          <p className="text-white/90">{stat.label}</p>
         </div>
       ))}
     </div>
