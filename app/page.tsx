@@ -4,6 +4,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 // import { HeroCarousel } from "./components/HeroCarousel";
 import CurvedCarousel from "./components/CurvedCarousel";
+import VideoModal from "./components/VideoModal"; // Add this
+import { useState } from 'react'; 
 
 
 const stats = [
@@ -64,9 +66,18 @@ const waysToJoin = [
 ];
 
 export default function Home() {
+  const [isVideoOpen, setIsVideoOpen] = useState(false)
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0c2340] via-[#E6F3FF] to-[#15162b] text-slate-900">
+      {/* Video Modal */}
+      <VideoModal 
+        isOpen={isVideoOpen} 
+        onClose={() => setIsVideoOpen(false)}
+        videoId="dQw4w9WgXcQ" // Replace with your YouTube video ID
+      />
       
+
+
       <main className="pt-16">
         {/* Hero with Curved Carousel */}
 
@@ -225,7 +236,7 @@ export default function Home() {
       {/* How it works */}
 <section
   id="how-it-works"
-  className="relative mt-10 bg-gradient-to-b from-[#DBEAFE] via-[#C7D2FE] to-[#A5B4FC] py-20 sm:py-24"
+  className="relative mt-10 bg-gradient-to-b from-[#DBEAFE] via-[#C7D2FE] to-[#A5B4FC] py-20 sm:py-24 pb-32"
 >
   <div className="mx-auto max-w-5xl px-6">
     <motion.div
@@ -324,96 +335,155 @@ export default function Home() {
 
         {/* Initiatives */}
         {/* Initiatives */}
+{/* Initiatives - Slides up to cover previous section */}
+{/* Initiatives - Slides up to cover previous section */}
+{/* Initiatives - Seamless overlay with bordered content */}
 <section
   id="initiatives"
-  className="relative mt-10 bg-gradient-to-b from-[#6366F1] via-[#4F46E5] to-[#4338CA] py-20 sm:py-24 text-slate-50 overflow-hidden"
+  className="relative z-30 min-h-screen pt-20 pb-20 sm:pb-24 text-white overflow-hidden"
 >
-  {/* Animated grid background */}
-  <div className="absolute inset-0 opacity-10">
+  {/* Background Image with Dark Overlay */}
+  <div className="absolute inset-0">
+    <div 
+      className="absolute inset-0 bg-cover bg-center"
+      style={{
+        backgroundImage: 'url(/images/hero3.jpg)',
+      }}
+    />
+    <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-800/85 to-slate-900/90" />
+  </div>
+
+  {/* Seamless Top Edge - No wave, just gradient blend */}
+  <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#A5B4FC] to-transparent pointer-events-none" />
+
+  {/* Subtle grid overlay */}
+  <div className="absolute inset-0 opacity-5">
     <div className="absolute inset-0" style={{
-      backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                       linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+      backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
       backgroundSize: '50px 50px'
     }} />
   </div>
 
-  <div className="relative mx-auto max-w-6xl px-6">
+  {/* Bordered Content Container */}
+  <div className="relative mx-auto max-w-6xl px-6 mt-16">
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className="space-y-4 text-center mb-12"
+      transition={{ duration: 0.8 }}
+      className="border-2 border-white/20 rounded-3xl p-8 sm:p-12 backdrop-blur-sm bg-slate-900/30"
     >
+      {/* Header with Play Button */}
       <motion.div
-        initial={{ width: 0 }}
-        whileInView={{ width: "4rem" }}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="h-1 bg-emerald-400 rounded-full mx-auto"
-      />
-      <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-        Current community initiatives.
-      </h2>
-      <p className="text-base md:text-lg leading-relaxed text-indigo-100 max-w-2xl mx-auto">
-        These are a few of the live areas where Heroes are currently
-        showing up — with funding, mentorship, and hands-on builds.
-      </p>
-    </motion.div>
-
-    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-      {initiatives.map((item, index) => (
-        <motion.article
-          key={item.title}
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
-          whileHover={{ 
-            y: -12,
-            rotateY: 5,
-            rotateX: 5,
-          }}
-          style={{ transformStyle: 'preserve-3d' }}
-          className="group relative cursor-pointer"
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="space-y-6 text-center mb-16"
+      >
+        {/* Play Button */}
+        <motion.button
+          onClick={() => setIsVideoOpen(true)}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="mx-auto w-20 h-20 rounded-full bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center shadow-2xl hover:shadow-pink-500/50 transition-all duration-300 group relative"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/30 to-blue-400/30 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          
-          <div className="relative h-full flex flex-col gap-4 rounded-3xl border border-indigo-300/30 bg-indigo-900/60 backdrop-blur-sm p-6 shadow-xl hover:shadow-2xl transition-all duration-500">
-            <motion.div
-              whileHover={{ scale: 1.2, rotate: 360 }}
-              transition={{ duration: 0.6 }}
-              className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-500 shadow-lg"
-            >
-              <Image
-                src={item.icon}
-                alt=""
-                width={32}
-                height={32}
-                className="opacity-95 brightness-0 invert"
-              />
-            </motion.div>
-            
-            <div className="flex-1">
-              <h3 className="text-xl font-bold tracking-tight text-slate-50 mb-3">
-                {item.title}
-              </h3>
-              <p className="text-sm leading-relaxed text-indigo-100">
-                {item.body}
-              </p>
-            </div>
+          <span className="absolute inset-0 rounded-full bg-pink-400 animate-ping opacity-20" />
+          <svg className="relative w-8 h-8 text-white ml-1 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </motion.button>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="mt-4 w-full rounded-full bg-emerald-400/20 border border-emerald-400/50 px-4 py-2 text-sm font-semibold text-emerald-300 hover:bg-emerald-400/30 transition-colors duration-300"
-            >
-              Learn more →
-            </motion.button>
-          </div>
-        </motion.article>
-      ))}
-    </div>
+        <div>
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: "4rem" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="h-1 bg-pink-400 rounded-full mx-auto mb-6"
+          />
+          
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-tight">
+            <span className="block">EMPOWERING</span>
+            <span className="block text-pink-300 italic font-light">People</span>
+            <span className="block">THROUGH</span>
+            <span className="block">COMPREHENSIVE</span>
+            <span className="block">PROGRAMS</span>
+          </h2>
+          
+          <p className="text-lg md:text-xl leading-relaxed text-white/95 max-w-2xl mx-auto">
+            These programs are committed to giving every person, regardless of circumstances, 
+            an opportunity to succeed in their community and beyond.
+          </p>
+        </div>
+      </motion.div>
+
+      {/* Initiative Cards */}
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 mb-12">
+        {initiatives.map((item, index) => (
+          <motion.article
+            key={item.title}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileHover={{ 
+              y: -12,
+              rotateY: 5,
+              rotateX: 5,
+            }}
+            style={{ transformStyle: 'preserve-3d' }}
+            className="group relative cursor-pointer"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-pink-400/30 to-purple-400/30 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            <div className="relative h-full flex flex-col gap-4 rounded-3xl border border-white/30 bg-slate-900/70 backdrop-blur-md p-6 shadow-xl hover:shadow-2xl transition-all duration-500">
+              <motion.div
+                whileHover={{ scale: 1.2, rotate: 360 }}
+                transition={{ duration: 0.6 }}
+                className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-400 to-rose-500 shadow-lg"
+              >
+                <Image
+                  src={item.icon}
+                  alt=""
+                  width={32}
+                  height={32}
+                  className="opacity-95 brightness-0 invert"
+                />
+              </motion.div>
+              
+              <div className="flex-1">
+                <h3 className="text-xl font-bold tracking-tight text-white mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-white/90">
+                  {item.body}
+                </p>
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="mt-4 w-full rounded-full bg-pink-400/20 border border-pink-400/50 px-4 py-2 text-sm font-semibold text-pink-200 hover:bg-pink-400/30 transition-colors duration-300"
+              >
+                Learn more →
+              </motion.button>
+            </div>
+          </motion.article>
+        ))}
+      </div>
+
+      {/* Bottom text */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        className="text-center text-sm text-white/70"
+      >
+        New initiatives are proposed by community partners on a rolling basis.
+      </motion.p>
+    </motion.div>
   </div>
 </section>
 
